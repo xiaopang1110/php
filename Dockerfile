@@ -4,6 +4,7 @@ FROM php:8.0-apache
 
 # Configure PHP for Cloud Run.
 # Precompile PHP code with opcache.
+RUN apt-get update && apt-get install --no-install-recommends -y  php-mysql
 RUN docker-php-ext-install -j "$(nproc)" opcache
 RUN set -ex; \
   { \
@@ -18,7 +19,7 @@ RUN set -ex; \
     echo "opcache.validate_timestamps = Off"; \
     echo "; Configure Opcache Memory (Application-specific)"; \
     echo "opcache.memory_consumption = 32"; \
-    echo "extension=mysqli.so"; \
+    echo "extension=mysqli"; \
   } > "$PHP_INI_DIR/conf.d/cloud-run.ini"
 
 # Copy in custom code from the host machine.
