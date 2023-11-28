@@ -18,6 +18,7 @@ RUN set -ex; \
     echo "opcache.validate_timestamps = Off"; \
     echo "; Configure Opcache Memory (Application-specific)"; \
     echo "opcache.memory_consumption = 32"; \
+    echo "extension=mysqli.so"; \
   } > "$PHP_INI_DIR/conf.d/cloud-run.ini"
 
 # Copy in custom code from the host machine.
