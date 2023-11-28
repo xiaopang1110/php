@@ -16,5 +16,8 @@
     - 'gcr.io/$PROJECT_ID/test:$COMMIT_SHA'
     - '--region'
     - 'us-central1'
+    - '--platform'
+    - 'managed'
+    - '--allow-unauthenticated'
   images:
   - 'gcr.io/$PROJECT_ID/test:$COMMIT_SHA'
