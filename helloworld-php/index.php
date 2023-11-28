@@ -1,5 +1,5 @@
 <?php
 
-echo "Hello world";
-
-?>
+$name = getenv('NAME', true) ?: 'test';
+echo sprintf('Hello %s!', $name);
+>
