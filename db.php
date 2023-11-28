@@ -1,28 +1,30 @@
-<?
-$mysql_conf = array(
-    'host'    => '10.194.0.2:3306', 
-    'db'      => 'wordpress', 
-    'db_user' => 'root', 
-    'db_pwd'  => 'mysql@ime', 
-    );
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MySQL 连接示例</title>
+</head>
+<body>
+    <?php
+    // 数据库连接参数
+    $host = '10.194.0.2:3306';
+    $database = 'wordpress';
+    $username = 'root';
+    $password = 'mysql@ime';
 
-$mysqli = @new mysqli($mysql_conf['host'], $mysql_conf['db_user'], $mysql_conf['db_pwd']);
-if ($mysqli->connect_errno) {
-    die("could not connect to the database:\n" . $mysqli->connect_error);//诊断连接错误
-}
-$mysqli->query("set names 'utf8';");//编码转化
-$select_db = $mysqli->select_db($mysql_conf['db']);
-if (!$select_db) {
-    die("could not connect to the db:\n" .  $mysqli->error);
-}$sql = "select count(*) from wp_users;";
-$res = $mysqli->query($sql);
-if (!$res) {
-    die("sql error:\n" . $mysqli->error);
-}
- while ($row = $res->fetch_assoc()) {
-        var_dump($row);
+    // 创建数据库连接
+    $conn = mysqli_connect($host, $username, $password, $database);
+
+     // 检查连接是否成功
+    if ($conn) {
+        echo "<h1>MySQL 连接成功！</h1>";
+    } else {
+        echo "<h1>MySQL 连接失败: " . mysqli_connect_error() . "</h1>";
     }
+    ?>
 
-$res->free();
-$mysqli->close();
-?>
+    <?php
+    // 关闭数据库连接
+    mysqli_close($conn);
+    ?>
+</body>
+</html>
